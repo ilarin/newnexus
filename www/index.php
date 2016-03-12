@@ -10,4 +10,4 @@ $actionName = (isset($_GET['action']) ? $_GET['action'] : 'index');
 
 //функция загрузки страниц 
 //Локация: library/mainFunction.php
-loadPage($controllerName, $actionName);
+loadPage($smarty, $controllerName, $actionName);
