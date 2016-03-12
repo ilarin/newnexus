@@ -9,7 +9,7 @@ $dbuser = "root";
 $dbpasswd = "";
 
 //соединяемся с БД
-$db = mysqli_connect($dblocation, $dbuser, $dbpasswd, $dbname);
+$db = mysql_connect($dblocation, $dbuser, $dbpasswd);
 //$db = mysql_connect($dbpasswd, $dbuser, $dbname);
 //$db = mysql_connect($dblocation, $dbuser, $dbpasswd);
 
@@ -19,10 +19,10 @@ if(! $db){
 }
 
 //Кодировка для текущего соединения
-mysqli_set_charset($db,'utf8');
+mysql_set_charset('utf8');
 
 
-if(!mysqli_select_db($db,$dbname)){
+if(!mysql_select_db($dbname,$db)){
     echo 'Ошибка доступа к базе данных'.$dbname;
     exit();
 }
