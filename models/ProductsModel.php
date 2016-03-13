@@ -51,7 +51,8 @@ function getProductById($itemId){
     $itemId = intval($itemId);
     $sql = "SELECT *
             FROM `products`
-            WHERE `id` = '{$itemId}'";
+            WHERE `id` = '{$itemId}'
+            LIMIT 1";
     $rs = mysql_query($sql);
     return mysql_fetch_assoc($rs);
 }
