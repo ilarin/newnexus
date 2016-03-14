@@ -9,6 +9,14 @@ body {
     
     background-color: rgba(255,0,0,0.3);
 }
+.showHidden {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+#registerBoxHidden {
+    display: none;
+}
 #header {
     height: 70px;
     text-align: center;

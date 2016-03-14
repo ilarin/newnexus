@@ -1,5 +1,9 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="keyword [, keyword]*" />
+        <meta name="description" content="" />
         <title>{$pageTitle}</title>
         <link rel="stylesheet" href="{$templateWebPath}css/main.css" type="text/css" />
         <script src="{$templateWebPath}js/jquery-2.2.1.min.js" type="text/javascript"></script>
