@@ -16,7 +16,7 @@ function getChildrenForCat($catId){
             WHERE `parent_id` = '{$catId}'";
     $rs = mysql_query($sql);
     
-    return createSmartyRsArray($rs);
+    return createSmartyRsArray($rs); //loc: library/MainFunctions.php
 }
 
 
@@ -32,7 +32,7 @@ function getAllMainCatsWithChildren(){
     
     $smartyRs = array();
     while($row = mysql_fetch_assoc($rs)){
-        $rsChildren = getChildrenForCat($row['id']);
+        $rsChildren = getChildrenForCat($row['id']); //loc: models/CategoriesModel.php
         if($rsChildren){
             $row['children'] = $rsChildren;
         }

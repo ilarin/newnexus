@@ -15,14 +15,20 @@ include_once '../models/CategoriesModel.php';
  * @param object $smarty шаблонизатор
  */
 function indexAction($smarty){
-    $itemId = isset($_GET['id']) ? $_GET['id'] : null;
+    $itemId = isset($_GET['id']) ? intval($_GET['id']) : null;
     if($itemId==null) exit();
     
     //получить данные продукта
-    $rsProduct = getProductById($itemId);
+    $rsProduct = getProductById($itemId); //loc: models/ProductModel.php
     
     //получить все категории
-    $rsCategories = getAllMainCatsWithChildren();
+    $rsCategories = getAllMainCatsWithChildren(); //loc: models/CategoriesModel.php
+    
+    //передаем в шаблонизатор флаг, имеется ли товар в корзине или нет
+    $smarty->assign('itemInCart', 0);
+    if(in_array($itemId, $_SESSION['cart'])){
+        $smarty->assign('itemInCart',1);
+    }
     
     $smarty->assign('pageTitle','');
     $smarty->assign('rsCategories',$rsCategories);

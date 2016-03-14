@@ -16,6 +16,9 @@ $controllerName = (isset($_GET['controller']) ? ucfirst($_GET['controller']) : '
 //определяем с какой функцией будем работать
 $actionName = (isset($_GET['action']) ? $_GET['action'] : 'index');
 
+//передаем в шаблон количество элементов в корзине из сессии
+$smarty->assign('cartCntItems',  count($_SESSION['cart']));
+
 //функция загрузки страниц 
 //Локация: library/mainFunction.php
 loadPage($smarty, $controllerName, $actionName);

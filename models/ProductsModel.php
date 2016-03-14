@@ -56,3 +56,21 @@ function getProductById($itemId){
     $rs = mysql_query($sql);
     return mysql_fetch_assoc($rs);
 }
+
+/**
+ * Получить список продуктов из массива идентивикаторов ID's
+ * 
+ * @param array $itemsIds массив ИД
+ * @return array массив продуктов
+ */
+function getProductsFromArray($itemsIds){
+    $strIds = implode($itemsIds, ', ');
+    //var_dump($strIds);
+    $sql = "SELECT *
+            FROM `products`
+            WHERE `id` in ({$strIds})
+           ";
+    $rs = mysql_query($sql);
+    //var_dump($rs);
+    return createSmartyRsArray($rs);
+}

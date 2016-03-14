@@ -5,6 +5,10 @@ body {
 .hideme {
     display: none;
 }
+.deleted {
+    
+    background-color: rgba(255,0,0,0.3);
+}
 #header {
     height: 70px;
     text-align: center;
