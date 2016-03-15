@@ -1,7 +1,7 @@
 {* страница продукта *}
 <h3>{$rsProduct['name']}</h3>
-
-<img src="/images/{$rsProduct['image']}">
+{if empty($rsProduct['image'])}{$rsProduct['image'] = 'placeholder.png'}{/if}
+<img src="/image/{$rsProduct['image']}">
 Стоимость: {$rsProduct['price']}
 
 <a id="addCart_{$rsProduct['id']}" {if $itemInCart}class="hideme"{/if} onClick="addToCart({$rsProduct['id']});return false;" href="#" alt="">Добавить в корзину</a>
