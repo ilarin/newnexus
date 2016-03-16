@@ -22,15 +22,16 @@
 <div id="myModal" class="reveal-modal tiny" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <form>
       <div class="row column log-in-form">
-        <h4 class="text-center">Авторизация</h4>
+        <h4 class="text-center">Log in with you email account</h4>
         <label>Email
           <input type="text" placeholder="somebody@example.com">
         </label>
-        <label>Пароль
-          <input type="password" placeholder="Password">
+        <label>Password
+          <input type="text" placeholder="Password">
         </label>
-        <p><a type="submit" class="button expand">Войти</a></p>
-        <p class="text-center"><a href="#">Забыли пароль?</a></p>   
+        <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
+        <p><a type="submit" class="button expanded">Log In</a></p>
+        <p class="text-center"><a href="#">Forgot your password?</a></p>   
       </div>
     </form>
 
