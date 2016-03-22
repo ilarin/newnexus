@@ -5,8 +5,21 @@
  */
 
 //подключаем модели
-include_once '../models/CategoriesModel.php';
+//include_once '../models/CategoriesModel.php';
 include_once '../models/UsersModel.php';
+
+
+function indexAction($smarty){
+    if(!isset($_SESSION['user'])) {
+        redirect('/');
+    }
+    
+    $smarty->assign('pageTitle','Страница пользователя');
+    
+    loadTemplate($smarty, 'header');
+    loadTemplate($smarty, 'user');
+    loadTemplate($smarty, 'footer');
+}
 
 /**
  * AJAX регистрация пользователя
@@ -93,4 +106,50 @@ function loginAction(){
     
     echo json_encode($resData);
     
+}
+
+function updateAction(){
+    if(!isset($_SESSION['user'])) {
+        redirect('/');
+    }
+    
+    $resData = array();
+    $name = isset($_REQUEST['newName']) ? $_REQUEST['newName'] : null;
+    $phone = isset($_REQUEST['newPhone']) ? $_REQUEST['newPhone'] : null;
+    $adress = isset($_REQUEST['newAdress']) ? $_REQUEST['newAdress'] : null;
+    $pwd1 = isset($_REQUEST['newPwd1']) ? $_REQUEST['newPwd1'] : null;
+    $pwd2 = isset($_REQUEST['newPwd2']) ? $_REQUEST['newPwd2'] : null;
+    $curPwd = isset($_REQUEST['curPwd']) ? $_REQUEST['curPwd'] : null;
+    
+    $curPwdMd5 = md5($curPwd);
+    if(!$curPwd || ($_SESSION['user']['pwd'] != $curPwdMd5)){
+        $resData['success'] = 0;
+        $resData['message'] = 'Текущий пароль не верный!';
+        echo json_encode($resData);
+        return false;
+    }
+    $res1 = null;
+    $res1 = updateUserData($name, $phone, $adress, $pwd1, $pwd2, $curPwdMd5);
+    //alert($res);
+    if($res1){
+        $resData['success'] = 1;
+        $resData['message'] = 'Данные сохранены';
+        $resData['userName'] = $name;
+        
+        $_SESSION['user']['name'] = $name;
+        $_SESSION['user']['phone'] = $phone;
+        $_SESSION['user']['adress'] = $adress;
+        
+        $newPwd = $_SESSION['user']['pwd'];
+        if($pwd1 && ($pwd1 == $pwd2)){
+            $newPwd = md5(trim($pwd1));
+        }
+        $_SESSION['user']['pwd'] = $newPwd;
+        $_SESSION['user']['displayName']= $name ? $name : $_SESSION['user']['email'];
+    }
+    else{
+        $resData['success']=0;
+        $resData['message']='Ошибка сохранения данных';
+    }
+    echo json_encode($resData);
 }

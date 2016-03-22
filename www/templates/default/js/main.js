@@ -14,8 +14,8 @@ function addToCart(itemId){
             if(data['success']){
                 $('#cartCntItems').html(data['cntItems']);
                 $('#cartLineItem_' + itemId).fadeTo(300,1);// установить видимость элемента 100%
-                $('#addCart_' + itemId).hide();//скрыть элемент
-                $('#removeCart_' + itemId).show();//показать элемент                
+                $('#addCart_' + itemId).addClass('hideme');//скрыть элемент
+                $('#removeCart_' + itemId).removeClass('hideme');//показать элемент                
             }
         }
     });
@@ -36,8 +36,8 @@ function removeFromCart(itemId){
            if(data['success']){
                $('#cartCntItems').html(data['cartCntItems']);
                $('#cartLineItem_' + itemId).fadeTo(300,0.33);// установить видимость элемента 33%
-               $('#addCart_' + itemId).show();//показать элемент
-               $('#removeCart_' + itemId).hide();//скрыть элемент               
+               $('#addCart_' + itemId).removeClass('hideme');//показать элемент
+               $('#removeCart_' + itemId).addClass('hideme');//скрыть элемент               
            }
        }
     });
@@ -86,14 +86,16 @@ function registerNewUser(){
             if(data['success']){
                 alert('Регистрация прошла успешно');
                 
-                $('#registerBox').hide();
+                $('#regModal').foundation('reveal','close')
                 
                 $('#userLink').attr('href','/user/');
                 $('#userLink').html(data['userName']);
-                $('#userBox').show();
+                $('#userBox').removeClass('hideme');
+                $('#orderUserInfoBox').removeClass('hideme');
                 
                 $('#loginBox').hide();
                 $('#btnSaveOrder').show();
+                location.reload();
             }
             else {
                 alert('что то пошлло не так...');
@@ -120,12 +122,14 @@ function login(){
         dataType: 'json',
         success: function(data){
             if(data['success']){
-                $('#registerBox').hide();
+                $('#authModal').foundation('reveal','close');
+
                 $('#loginBox').hide();
-                
                 $('#userLink').attr('href','/user/');
-                $('#userLink').html(data['displayName']);
-                $('#userBox').show();
+                $('#userLink').html('Профиль: '+data['displayName']);
+                $('#userBox').removeClass('hideme');
+                $('#orderUserInfoBox').removeClass('hideme');
+                location.reload();
             }
             else {
                 alert(data['message']);
@@ -150,4 +154,37 @@ function showRegisterBox(){
         $('#registerBoxHidden').hide();
         
     }
+}
+
+function updateUserData(){
+    console.log('js- UpdateUser');
+    var phone = $('#newPhone').val();
+    var adress = $('#newAdress').val();
+    var pwd1 = $('#newPwd1').val();
+    var pwd2 = $('#newPwd2').val();
+    var curPwd= $('#curPwd').val();
+    var name = $('#newName').val();
+    
+    var postData = {newPhone: phone,
+                    newAdress: adress,
+                    newPwd1: pwd1,
+                    newPwd2: pwd2,
+                    curPwd: curPwd,
+                    newName: name};
+            
+    $.ajax({
+        type: 'POST',
+        asunc: false,
+        url: "/user/update/",
+        data: postData,
+        dataType:'json',
+        success: function(data){
+            if(data['success']){
+                $('#userLink').html(data['userName']);
+                alert(data['message']);
+            }else{
+                alert(data['message']);
+            }
+        }
+    });
 }

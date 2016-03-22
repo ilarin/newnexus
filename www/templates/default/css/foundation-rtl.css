@@ -1886,7 +1886,7 @@ select {
     text-transform: uppercase; }
     .breadcrumbs li:not(:last-child)::after {
       color: #cacaca;
-      content: "\\";
+      content: '\\';
       margin: 0 0.75rem;
       position: relative;
       top: 1px;

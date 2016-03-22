@@ -2,7 +2,25 @@
 /**
  * Основные функции
  */
-
+function getTree($arr){
+   
+    $out = '';
+   
+    $out .= '';
+    foreach($arr as $k=>$v){
+       
+        $out .= '<li><a href="/category/'.$k.'/">'.$v['name'].'</a>';
+        if(!empty($v['children'])){
+            $out.='<ul>';
+            $out .= getTree($v['children']);
+            //$classs='';
+        }
+       $out .= '</li>';
+    }
+    $out .= '</ul>';
+    return $out;
+   
+}
 /**
  * Формирование запрашиваемой страницы
  * 

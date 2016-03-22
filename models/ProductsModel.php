@@ -74,3 +74,14 @@ function getProductsFromArray($itemsIds){
     //var_dump($rs);
     return createSmartyRsArray($rs);
 }
+
+/**
+ * Подсчет количества товаров принадлежащих категории
+ * @param integer $category_id ИД категории
+ * @return integer количество товаров в категории
+ */
+function getCountProductsInCat($category_id){
+    $sql = "SELECT COUNT(*) FROM products WHERE `category_id` = '{$category_id}'";
+    $rs = mysql_query($sql);
+    return $rs;
+}

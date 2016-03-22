@@ -14,7 +14,7 @@ include_once '../models/ProductsModel.php';
  */
 function indexAction($smarty){
     $catId = isset($_GET['id']) ? $_GET['id'] : null;
-    if($catId==null) exit();
+    //if($catId==null) exit();
     
     $rsChildCats = null;
     $rsProducts = null;
@@ -23,23 +23,26 @@ function indexAction($smarty){
     //echo $catId;
     //var_dump($smarty);
     //var_dump($rsCategory);
-    if($rsCategory['parent_id'] == 0){
+    
         $rsChildCats = getChildrenForCat($catId);
         //var_dump($rsChildCats);
-    }
-    else {
+    
         $rsProducts = getProductsByCat($catId);
         //var_dump($rsProducts);
-    }
+    
     $rsCategories = getAllMainCatsWithChildren();
     
+    $rsCategories1=  getTree($rsCategories);
+    //var_dump($rsCategories1);
     $smarty->assign('pageTitle','Товары категории' . $rsCategory['name']);
     $smarty->assign('rsCategory',$rsCategory);
     $smarty->assign('rsProducts',$rsProducts);
     $smarty->assign('rsChildCats',$rsChildCats);
-    $smarty->assign('rsCategories',$rsCategories);
+    //$smarty->assign('rsCategories',$rsCategories);
+    $smarty->assign('rsCategories1',$rsCategories1);
     
     loadTemplate($smarty, 'header');
     loadTemplate($smarty, 'category');
     loadTemplate($smarty, 'footer');
 }
+

@@ -1,9 +1,11 @@
 
 {* шаблон страницы корзины *}
+<div class="small-12 columns">
 <h1>Корзина продуктов</h1>
 {if !$rsProducts}
 В корзине пусто
 {else}
+    <form action="/cart/order/" method="POST">
     <h2>Данные заказа</h2>
     <table class="medium-12">
         <thead>
@@ -41,4 +43,7 @@
         {/foreach}
         </tbody>
     </table>
+        <input type="submit" value="Оформить заказ" class="button" />
+    </form>
 {/if}
+</div>

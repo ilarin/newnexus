@@ -3681,7 +3681,7 @@ table.hover tr:nth-of-type(even):hover {
       -webkit-flex: 0 0 100%;
           -ms-flex: 0 0 100%;
               flex: 0 0 100%;
-      max-width: 100%; } }
+      max-width: 100%; } 
 
 -webkit-flex-wrap: wrap;
 
@@ -3693,7 +3693,7 @@ table.hover tr:nth-of-type(even):hover {
   -webkit-flex: 0 0 100%;
       -ms-flex: 0 0 100%;
           flex: 0 0 100%;
-  max-width: 100%; }
+  max-width: 100%; }}
 
 @media screen and (min-width: 40em) {
   -webkit-flex-wrap: nowrap;

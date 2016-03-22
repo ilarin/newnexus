@@ -7,7 +7,7 @@
 
 //подключаем модели
 include_once '../models/ProductsModel.php';
-include_once '../models/CategoriesModel.php';
+//include_once '../models/CategoriesModel.php';
 
 /**
  * Формирование страницы продукта
@@ -22,7 +22,7 @@ function indexAction($smarty){
     $rsProduct = getProductById($itemId); //loc: models/ProductModel.php
     
     //получить все категории
-    $rsCategories = getAllMainCatsWithChildren(); //loc: models/CategoriesModel.php
+    //$rsCategories = getAllMainCatsWithChildren(); //loc: models/CategoriesModel.php
     
     //передаем в шаблонизатор флаг, имеется ли товар в корзине или нет
     $smarty->assign('itemInCart', 0);
@@ -31,7 +31,7 @@ function indexAction($smarty){
     }
     
     $smarty->assign('pageTitle','');
-    $smarty->assign('rsCategories',$rsCategories);
+    //$smarty->assign('rsCategories',$rsCategories);
     $smarty->assign('rsProduct',$rsProduct);
     
     loadTemplate($smarty, 'header');
